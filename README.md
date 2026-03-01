@@ -14,7 +14,7 @@
 ## 🌐 Live Demo
 
 **🔗 [https://pratik-chandra-thakur-secops-portfolio-eyr844j3a.vercel.app](https://pratik-chandra-thakur-secops-portfolio-eyr844j3a.vercel.app)**
-**🔗 [https://pratikchandrathakur.com.np](https://pratikchandrathakur.com.np)**
+**🔗 [https://pratikchandrathakur.com.np](http://pratikchandrathakur.com.np)**
 
 
 ---
