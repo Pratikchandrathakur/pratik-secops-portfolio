@@ -11,9 +11,9 @@ export const SOCIAL_LINKS: SocialLink[] = [
 export const EXPERIENCE_DATA: Experience[] = [
   {
     id: 'exp1',
-    role: 'Security Analyst',
-    company: 'DigitalForensic UK',
-    period: 'May 2025 - Present',
+    role: 'Security Solution Lead',
+    company: 'CyberAlertNepal',
+    period: 'Dec 2025 - Present',
     description: [
       'Monitor and analyze security alerts and events to detect potential threats.',
       'Contribute to incident response efforts and disaster recovery planning.',
@@ -24,16 +24,16 @@ export const EXPERIENCE_DATA: Experience[] = [
   },
   {
     id: 'exp2',
-    role: 'Full Stack Development Journey',
-    company: 'IBM (via Coursera)',
-    period: 'Aug 2024 - Present',
+    role: 'Security Analyst',
+    company: 'CyberAlertNepal',
+    period: 'Feb 2025 - Nov 2025',
     description: [
-      'Strengthening core web development skills in HTML, CSS, and JavaScript.',
-      'Developing proficiency in front-end frameworks for dynamic user interfaces.',
-      'Building foundational knowledge in back-end development and RESTful API creation.',
-      'Modules in Software Engineering, Git/GitHub, and JS Essentials.'
+      'Monitor and analyze security alerts and events to detect potential threats.',
+      'Contribute to incident response efforts and disaster recovery planning.',
+      'Apply best practices in network security to protect organizational assets.',
+      'Collaborate with cross-functional teams to ensure security compliance.'
     ],
-    skills: ['React', 'Node.js', 'REST APIs', 'Software Engineering']
+    skills: ['SIEM', 'Incident Response', 'Network Security', 'Compliance']
   }
 ];
 
