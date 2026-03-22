@@ -2,6 +2,26 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Project, Certification, Experience, Category } from '../types';
 import { PROJECTS, CERTIFICATIONS, EXPERIENCE_DATA } from '../constants';
 
+const STORAGE_KEYS = {
+  projects: 'portfolio_projects',
+  certifications: 'portfolio_certifications',
+  experience: 'portfolio_experience',
+  version: 'portfolio_data_version',
+} as const;
+
+// Bump this when seeded constants change and should override previously cached local data.
+const DATA_VERSION = '2026-03-22-v1';
+
+function getInitialData<T>(key: string, fallback: T): T {
+  const storedVersion = localStorage.getItem(STORAGE_KEYS.version);
+  if (storedVersion !== DATA_VERSION) {
+    return fallback;
+  }
+
+  const saved = localStorage.getItem(key);
+  return saved ? JSON.parse(saved) : fallback;
+}
+
 interface DataContextType {
   projects: Project[];
   certifications: Certification[];
@@ -22,32 +42,27 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Initialize state from localStorage or fallback to constants
-  const [projects, setProjects] = useState<Project[]>(() => {
-    const saved = localStorage.getItem('portfolio_projects');
-    return saved ? JSON.parse(saved) : PROJECTS;
-  });
+  const [projects, setProjects] = useState<Project[]>(() => getInitialData(STORAGE_KEYS.projects, PROJECTS));
 
-  const [certifications, setCertifications] = useState<Certification[]>(() => {
-    const saved = localStorage.getItem('portfolio_certifications');
-    return saved ? JSON.parse(saved) : CERTIFICATIONS;
-  });
+  const [certifications, setCertifications] = useState<Certification[]>(() => getInitialData(STORAGE_KEYS.certifications, CERTIFICATIONS));
 
-  const [experience, setExperience] = useState<Experience[]>(() => {
-    const saved = localStorage.getItem('portfolio_experience');
-    return saved ? JSON.parse(saved) : EXPERIENCE_DATA;
-  });
+  const [experience, setExperience] = useState<Experience[]>(() => getInitialData(STORAGE_KEYS.experience, EXPERIENCE_DATA));
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.version, DATA_VERSION);
+  }, []);
 
   // Persist changes
   useEffect(() => {
-    localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+    localStorage.setItem(STORAGE_KEYS.projects, JSON.stringify(projects));
   }, [projects]);
 
   useEffect(() => {
-    localStorage.setItem('portfolio_certifications', JSON.stringify(certifications));
+    localStorage.setItem(STORAGE_KEYS.certifications, JSON.stringify(certifications));
   }, [certifications]);
 
   useEffect(() => {
-    localStorage.setItem('portfolio_experience', JSON.stringify(experience));
+    localStorage.setItem(STORAGE_KEYS.experience, JSON.stringify(experience));
   }, [experience]);
 
   // Project Actions
